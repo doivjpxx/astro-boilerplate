@@ -13,7 +13,7 @@ function Dodecahedron(): JSX.Element {
   });
 
   return (
-    <mesh ref={ref} position={[0, 0, 0]}>
+    <mesh ref={ref} position={[0.25, 0.25, 0.25]}>
       <dodecahedronGeometry attach="geometry" />
       <meshNormalMaterial attach="material" />
     </mesh>

@@ -1,6 +1,7 @@
 ---
 import Yup from "../components/astro/yup.astro";
 import Yep from "../components/react/yep";
+import Cube from "../components/react/cube";
 ---
 
 <html lang="en">
@@ -39,6 +40,9 @@ import Yep from "../components/react/yep";
       </p><div class="mt-10 flex justify-center gap-x-6">
         <Yup />
         <Yep />
+      </div>
+      <div class="flex justify-center">
+        <Cube client:load />
       </div>
     </div>
   </body>

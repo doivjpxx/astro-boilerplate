@@ -1,12 +1,8 @@
 ---
 import MainHead from "../components/astro/MainHead.astro";
+import { MainProps } from "../core/type";
 
-interface Props {
-  title?: string | undefined;
-  description?: string | undefined;
-  includeFontAwesome?: boolean | undefined;
-  includeGsap?: boolean | undefined;
-}
+interface Props extends MainProps {}
 
 const { title, description, includeFontAwesome, includeGsap } = Astro.props;
 ---

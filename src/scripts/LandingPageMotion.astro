@@ -1,0 +1,26 @@
+<script is:inline>
+const heading = new SplitText("h1", { type: "words" });
+const description = new SplitText("p", { type: "chars" });
+const tl = gsap.timeline({
+    defaults: {
+        opacity: 0,
+        ease: "back(4)",
+        duration: 0.6,
+    },
+});
+tl.from(heading.words, {
+    y: 50,
+    stagger: {
+        from: "end",
+        each: 0.05,
+    },
+})
+    .from(description.chars, {
+        stagger: {
+            from: "start",
+            each: 0.02,
+        },
+        duration: 0.15,
+    })
+    .from(".path", { duration: 2, drawSVG: 0, ease: "none" }, 0.5);
+</script>

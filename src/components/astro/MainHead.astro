@@ -1,16 +1,12 @@
 ---
-interface Props {
-  title?: string | undefined;
-  description?: string | undefined;
-  includeFontAwesome?: boolean | undefined;
-  includeGsap?: boolean | undefined;
-}
+import { GsapPlugin, MainProps } from "../../core/type";
+interface Props extends MainProps {}
 
 const {
   title = "Astro boilerplate",
   description = "What is this?",
   includeFontAwesome = false,
-  includeGsap = false,
+  includeGsap = undefined,
 } = Astro.props;
 ---
 
@@ -37,13 +33,27 @@ const {
 }
 
 {
-  includeGsap && (
+  includeGsap && includeGsap.enabled && (
     <>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" />
       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" />
-      <script src="https://assets.codepen.io/16327/SplitText3.min.js" />
+      {
+        includeGsap.plugins.includes(GsapPlugin.SplitText) && <script src="https://assets.codepen.io/16327/SplitText3.min.js" />
+      }
+      {
+        includeGsap.plugins.includes(GsapPlugin.DrawSVG) && <script src="https://assets.codepen.io/16327/DrawSVGPlugin3.min.js" />
+      }
       
-      <script is:inline>gsap.config({trialWarn: false});</script>
+      <script is:inline define:vars={{
+        includeGsap,
+        pluginType: GsapPlugin
+      }}>
+        gsap.config({trialWarn: false});
+        {
+          includeGsap.plugins?.includes(pluginType.SplitText) && gsap.registerPlugin(SplitText);
+          includeGsap.plugins?.includes(pluginType.DrawSVG) && gsap.registerPlugin(DrawSVGPlugin);
+        }
+      </script>
     </>
   )
 }
